@@ -1,0 +1,16 @@
+[user]
+	name = Mathieu Petit
+	email = mathieu.petit@aromate.org
+[push]
+	default = simple
+[alias]
+	lol = log --graph --decorate --pretty=oneline --abbrev-commit
+        lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
+	hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+	sshow = "!f() { git stash show stash^{/$*} -p; }; f"
+	sapply = "!f() { git stash apply stash^{/$*}; }; f"
+[color]
+        branch = auto
+        diff = auto
+        interactive = auto
+        status = auto

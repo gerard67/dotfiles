@@ -1,11 +1,13 @@
 #!/bin/bash
 
-rm -rf ~/.vim ~/.vimrc ~/.zshrc ~/.tmux ~/.tmux.conf ~/.config/nvim 2> /dev/null
+DIR_BASE=$(pwd)
+
+rm -rf ~/.aliases ~/.gitconfig ~/.vim ~/.vimrc ~/.zshrc ~/.tmux ~/.tmux.conf ~/.config/nvim 2> /dev/null
 mkdir -p ~/.config ~/.config/nvim
 
-ln -s ~/Workspace/dotfiles/zshrc ~/.zshrc
-ln -s ~/Workspace/dotfiles/tmux.conf ~/.tmux.conf
-ln -s ~/Workspace/dotfiles/init.vim ~/.config/nvim/init.vim
+ln -s $DIR_BASE/aliases ~/.aliases
+ln -s $DIR_BASE/zshrc ~/.zshrc
+ln -s $DIR_BASE/tmux.conf ~/.tmux.conf
+ln -s $DIR_BASE/init.vim ~/.config/nvim/init.vim
+ln -s $DIR_BASE/gitconfig ~/.gitconfig
 
-alias vi="nvim"
-alias vim="nvim"

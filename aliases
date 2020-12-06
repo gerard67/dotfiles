@@ -1,0 +1,3 @@
+alias vi="nvim"
+alias vim="nvim"
+alias pjs="QT_QPA_PLATFORM='' phantomjs"

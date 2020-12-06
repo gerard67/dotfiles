@@ -1,3 +1,14 @@
+
+#Wayland
+if [[ -z $DISPLAY && $(tty) == /dev/tty1 && $XDG_SESSION_TYPE == tty ]]; then
+    MOZ_ENABLE_WAYLAND=1 QT_QPA_PLATFORM=xcb XDG_SESSION_TYPE=wayland exec dbus-run-session gnome-session
+fi
+
+#X11
+if [[ -z $DISPLAY && $(tty) == /dev/tty1 ]] ;then
+#    GDK_BACKEND=x11 exec startx
+fi
+
 if [[ -z "$TMUX" ]] ;then
     ID="$( tmux ls | grep -vm1 attached | cut -d: -f1 )" # get the id of a deattached session
     if [[ -z "$ID" ]] ;then # if not available create a new one
@@ -10,7 +21,8 @@ fi
 ZSH=/usr/share/oh-my-zsh
 
 source /usr/share/nvm/init-nvm.sh
-PATH=$PATH:/home/mathieu/.local/bin:/home/mathieu/.gem/ruby/2.6.0/bin:/home/mathieu/bin
+source $HOME/.aliases
+PATH=$PATH:/home/mathieu/.local/bin:/home/mathieu/.gem/ruby/2.7.0/bin:/home/mathieu/bin:${HOME}/.krew/bin
 
 ###-tns-completion-start-###
 if [ -f /home/mathieu/.tnsrc ]; then 
@@ -111,4 +123,35 @@ if [[ ! -d $ZSH_CACHE_DIR ]]; then
   mkdir $ZSH_CACHE_DIR
 fi
 
+# This speeds up pasting w/ autosuggest
+# https://github.com/zsh-users/zsh-autosuggestions/issues/238
+pasteinit() {
+  OLD_SELF_INSERT=${${(s.:.)widgets[self-insert]}[2,3]}
+  zle -N self-insert url-quote-magic # I wonder if you'd need `.url-quote-magic`?
+}
+
+pastefinish() {
+  zle -N self-insert $OLD_SELF_INSERT
+}
+zstyle :bracketed-paste-magic paste-init pasteinit
+zstyle :bracketed-paste-magic paste-finish pastefinish
+
 source $ZSH/oh-my-zsh.sh
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/home/mathieu/Workspace/google-cloud-sdk/path.zsh.inc' ]; then . '/home/mathieu/Workspace/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/home/mathieu/Workspace/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/mathieu/Workspace/google-cloud-sdk/completion.zsh.inc'; fi
+
+#kubectl
+alias k=kubectl
+if [ $commands[kubectl] ]; then source <(kubectl completion zsh); fi
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+fpath=(~/.zsh.d/ $fpath)
+
+source /usr/share/fzf/completion.zsh
+source /usr/share/fzf/key-bindings.zsh
+
+[ -f "/home/mathieu/.ghcup/env" ] && source "/home/mathieu/.ghcup/env" # ghcup-env
