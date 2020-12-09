@@ -10,4 +10,6 @@ ln -s $DIR_BASE/zshrc ~/.zshrc
 ln -s $DIR_BASE/tmux.conf ~/.tmux.conf
 ln -s $DIR_BASE/init.vim ~/.config/nvim/init.vim
 ln -s $DIR_BASE/gitconfig ~/.gitconfig
+ln -s $DIR_BASE/kitty_nord.conf ~/.config/kitty/nord.conf
+ln -s $DIR_BASE/kitty.conf ~/.config/kitty/kitty.conf
 
