@@ -1,3 +1,5 @@
 alias vi="nvim"
 alias vim="nvim"
+alias k="kubectl"
 alias pjs="QT_QPA_PLATFORM='' phantomjs"
+
