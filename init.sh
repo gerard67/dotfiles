@@ -12,4 +12,4 @@ ln -s $DIR_BASE/init.vim ~/.config/nvim/init.vim
 ln -s $DIR_BASE/gitconfig ~/.gitconfig
 ln -s $DIR_BASE/kitty_nord.conf ~/.config/kitty/nord.conf
 ln -s $DIR_BASE/kitty.conf ~/.config/kitty/kitty.conf
-
+ln -s $DIR_BASE/xinitrc ~/.xinitrc
